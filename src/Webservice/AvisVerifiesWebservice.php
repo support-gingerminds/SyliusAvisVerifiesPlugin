@@ -35,7 +35,7 @@ class AvisVerifiesWebservice
             'email' => $order->getCustomer()->getEmail(),
             'order_date' => $order->getUpdatedAt()->format('Y-m-d H:i:s'),
             'delay' => '0',
-            'products' => $productsPayload,
+            'PRODUCTS' => $productsPayload,
             'sign' => null
         ];
 
