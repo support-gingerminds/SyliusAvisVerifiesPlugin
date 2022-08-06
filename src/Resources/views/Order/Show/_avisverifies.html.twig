@@ -1,0 +1,14 @@
+{% if resource.channel.isAvisVerifiesActive %}    
+    <div class="ui fluid card" id="avisverifies">
+        <div class="content">
+            <p class="header">{{ 'ikuzo_avis_verifies.blocks.order.title'|trans }}</p>
+            <div class="meta">
+                {% if resource.avisVerifiesEmailsSent %}
+                    <span class="date">{{ 'ikuzo_avis_verifies.blocks.order.sent_at'|trans }} {{ resource.avisVerifiesEmailsSentAt|format_datetime }}</span>
+                {% else %}
+                    <span class="date">{{ 'ikuzo_avis_verifies.blocks.order.not_allready_sent'|trans }}</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}

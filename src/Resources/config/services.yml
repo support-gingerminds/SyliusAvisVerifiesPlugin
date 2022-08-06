@@ -1,0 +1,60 @@
+services:
+
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  ikuzo_sylius_avis_verifies.processor.orders:
+    class: Ikuzo\SyliusAvisVerifiesPlugin\Processor\AvisVerifiesOrdersProcessor
+    arguments:
+      - '@ikuzo_sylius_avis_verifies.order_provider.latest'
+      - '@ikuzo_sylius_avis_verifies.order_eligibility_checker'
+      - '@messenger.default_bus'
+
+  ikuzo_sylius_avis_verifies.command.process:
+    class: Ikuzo\SyliusAvisVerifiesPlugin\Command\AvisVerifiesProcessCommand
+    arguments: 
+      - '@ikuzo_sylius_avis_verifies.processor.orders'
+    tags: ['console.command']
+
+  ikuzo_sylius_avis_verifies.form.extension.channel:
+    class: Ikuzo\SyliusAvisVerifiesPlugin\Form\Extension\ChannelTypeExtension
+    tags: ['form.type_extension']
+
+  ikuzo_sylius_avis_verifies.order_provider.latest:
+    class: Ikuzo\SyliusAvisVerifiesPlugin\Provider\LatestOrdersProvider
+    arguments:
+      - '@sylius.repository.order'
+
+  ikuzo_sylius_avis_verifies.order_eligibility_checker:
+    class: Ikuzo\SyliusAvisVerifiesPlugin\EligibilityChecker\CompositeOrderEligibilityChecker
+    arguments: [!tagged { tag: 'ikuzo_sylius_avis_verifies.order_eligibility.checker' }]
+
+  ikuzo_sylius_avis_verifies.order_eligibility_checker.channel_avis_verifies_active:
+    class: Ikuzo\SyliusAvisVerifiesPlugin\EligibilityChecker\ChannelAvisVerifiesActiveChecker
+    tags: ['ikuzo_sylius_avis_verifies.order_eligibility.checker']
+
+  ikuzo_sylius_avis_verifies.order_eligibility_checker.per_order_invites_limit:
+    class: Ikuzo\SyliusAvisVerifiesPlugin\EligibilityChecker\InvitesPerOrderLimitOrderEligibilityChecker
+    tags: ['ikuzo_sylius_avis_verifies.order_eligibility.checker']
+
+  ikuzo_sylius_avis_verifies.message_handler.send_order_to_avis_verifies_handler:
+    class: Ikuzo\SyliusAvisVerifiesPlugin\MessageHandler\SendOrderToAvisVerifiesHandler
+    arguments:
+      - '@sylius.repository.order'
+      - '@ikuzo_sylius_avis_verifies.webservice.avis_verifies'
+      - '@doctrine.orm.entity_manager'
+    tags: ['messenger.message_handler']
+
+  ikuzo_sylius_avis_verifies.webservice.avis_verifies:
+    class: Ikuzo\SyliusAvisVerifiesPlugin\Webservice\AvisVerifiesWebservice
+    arguments:
+      - '@sylius.http_client'
+
+  ikuzo_sylius_avis_verifies.event_listener.on_order_fulfilled:
+    class: Ikuzo\SyliusAvisVerifiesPlugin\EventListener\OnOrderFulfilledEvent
+    public: true
+    arguments:
+      - '@ikuzo_sylius_avis_verifies.order_eligibility_checker'
+      - '@messenger.default_bus'
