@@ -1,0 +1,14 @@
+ikuzo_avis_verifies:
+  form:
+    title: Avis Vérifiés - Configuration
+    active: Actif
+    secret_key: Clé Secrète
+    website_id: ID Site internet
+  grid:
+    filters:
+      email_sent: Envoyé à Avis Vérifiés
+  blocks:
+    order:
+      title: Avis Vérifiés
+      sent_at: Envoyé à
+      not_allready_sent: Pas encore envoyé
