@@ -4,6 +4,24 @@ ikuzo_avis_verifies:
     active: Actif
     secret_key: Clé Secrète
     website_id: ID Site internet
+    days_before_sent: Délai d'attente avant demande d'avis
+    days:
+      zero: Immédiatement
+      one: 1 jour
+      two: 2 jours
+      three: 3 jours 
+      four: 4 jours 
+      five: 5 jours 
+      six: 6 jours 
+      seven: 7 jours 
+      eight: 8 jours 
+      nine: 9 jours 
+      ten: 10 jours 
+      fifteen: 15 jours 
+      twenty: 20 jours 
+      twenty_five: 25 jours 
+      thirty: 30 jours 
+      fourty: 40 jours 
   grid:
     filters:
       email_sent: Envoyé à Avis Vérifiés

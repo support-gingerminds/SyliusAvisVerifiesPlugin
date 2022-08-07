@@ -34,7 +34,7 @@ class AvisVerifiesWebservice
             'lastname' => $order->getCustomer()->getLastname(),
             'email' => $order->getCustomer()->getEmail(),
             'order_date' => $order->getUpdatedAt()->format('Y-m-d H:i:s'),
-            'delay' => '0',
+            'delay' => $order->getChannel()->getAvisVerifiesDaysBeforeSent(),
             'PRODUCTS' => $productsPayload,
             'sign' => null
         ];

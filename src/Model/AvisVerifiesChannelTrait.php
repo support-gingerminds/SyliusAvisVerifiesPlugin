@@ -22,6 +22,11 @@ trait AvisVerifiesChannelTrait {
      * @ORM\Column(name="avis_verifies_website_id", type="string", length="255", nullable="true")
      **/
     protected $avisVerifiesWebsiteId = null;
+    
+    /**
+     * @ORM\Column(name="avis_verifies_days_before_sent", type="integer", nullable="false")
+     **/
+    protected $avisVerifiesDaysBeforeSent = 0;
 
     public function getIsAvisVerifiesActive(): bool
     {
@@ -51,5 +56,15 @@ trait AvisVerifiesChannelTrait {
     public function getAvisVerifiesWebsiteId(): ?string
     {
         return $this->avisVerifiesWebsiteId;
+    }
+
+    public function setAvisVerifiesDaysBeforeSent(int $avisVerifiesDaysBeforeSent): void
+    {
+        $this->avisVerifiesDaysBeforeSent = $avisVerifiesDaysBeforeSent;
+    }
+
+    public function getAvisVerifiesDaysBeforeSent(): int
+    {
+        return $this->avisVerifiesDaysBeforeSent;
     }
 }

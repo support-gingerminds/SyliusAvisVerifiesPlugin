@@ -12,5 +12,6 @@ interface AvisVerifiesChannelInterface {
     public function getAvisVerifiesSecretKey(): ?string;
     public function setAvisVerifiesWebsiteId(string $input): void;
     public function getAvisVerifiesWebsiteId(): ?string;
-
+    public function getAvisVerifiesDaysBeforeSent(): int;
+    public function setAvisVerifiesDaysBeforeSent(int $input): void;
 }

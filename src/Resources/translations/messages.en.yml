@@ -4,6 +4,24 @@ ikuzo_avis_verifies:
     active: Active
     secret_key: Secret key
     website_id: Website ID
+    days_before_sent: Waiting period before requesting an opinion
+    days:
+      zero: Immediately
+      one: 1 day
+      two: 2 days
+      three: 3 days 
+      four: 4 days 
+      five: 5 days 
+      six: 6 days 
+      seven: 7 days 
+      eight: 8 days 
+      nine: 9 days 
+      ten: 10 days 
+      fifteen: 15 days 
+      twenty: 20 days 
+      twenty_five: 25 days 
+      thirty: 30 days 
+      fourty: 40 days 
   grid:
     filters:
       email_sent: Sent to Avis Vérifiés
