@@ -32,7 +32,7 @@ class AvisVerifiesProcessChannelReviewsCommand extends Command
             if(!$channel instanceof ChannelInterface) {
                 continue;
             }
-            $secretKey = $channel->getAvisVerifiesSecretKey();
+            $secretKey = $channel->getAvisVerifiesWebsiteId();
             if(in_array($secretKey, ['', null])) {
                 continue;
             }
@@ -43,9 +43,9 @@ class AvisVerifiesProcessChannelReviewsCommand extends Command
                 $res = $this->fetchChannelReviews($path);
                 $this->cycleReviews($channel, $res);
             } catch (\Exception $ex) {
-                // return Command::FAILURE;
+                // dd($ex);
             } catch (\Throwable $ex) {
-                // return Command::FAILURE;
+                // dd($ex);
             }
         }
 
@@ -60,7 +60,7 @@ class AvisVerifiesProcessChannelReviewsCommand extends Command
         for ($i = 0; $i < 3; $i ++) {
             $result .= substr($key, $i, 1) . '/';
         }
-        return $result . $key;
+        return $result . $key . '/AWS/WEBSITE_API/reviews.json';
     }
 
     protected function fetchChannelReviews(string $path): array
@@ -68,8 +68,7 @@ class AvisVerifiesProcessChannelReviewsCommand extends Command
         $res = [];
 
         $response = $this->client->request('GET', self::API_URL . $path);
-        $res = json_encode($response->getBody()->getContents());
-
+        $res = json_decode($response->getBody()->getContents(), true);
         return $res ?? [];
     }
 
@@ -85,15 +84,16 @@ class AvisVerifiesProcessChannelReviewsCommand extends Command
                 $review = new ChannelReview();
 
                 $order = $this->em->getRepository(OrderInterface::class)->findOneBy([
-                    'ref' => $arr['order_ref'],
+                    'number' => $arr['order_ref'],
                     'channel' => $channel
                 ]);
                 $review->setChannel($channel);
                 $review->setOrder($order);
+                $review->setReviewId($arr['id_review']);
             }
 
             $review->setContent($arr['review']);
-            $review->setRate($arr['rate']);
+            $review->setRate((int)$arr['rate']);
             $review->setLastname($arr['lastname']);
             $review->setFirstname($arr['firstname']);
             $review->setPublishedAt(new \DateTime($arr['publish_date']));
