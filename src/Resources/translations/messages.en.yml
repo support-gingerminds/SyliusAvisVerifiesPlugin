@@ -1,4 +1,6 @@
 ikuzo_avis_verifies:
+  ui:
+    channel_reviews: Channel reviews
   form:
     title: Avis Vérifiés - Configuration
     active: Active
@@ -23,8 +25,13 @@ ikuzo_avis_verifies:
       thirty: 30 days 
       fourty: 40 days 
   grid:
+    channel_review:
+      subheader: Manage reviews of your channels
     filters:
       email_sent: Sent to Avis Vérifiés
+  menu:
+    channel_review: 
+      label: Channel reviews
   blocks:
     order:
       title: Avis Vérifiés

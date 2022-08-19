@@ -58,3 +58,8 @@ services:
     arguments:
       - '@ikuzo_sylius_avis_verifies.order_eligibility_checker'
       - '@messenger.default_bus'
+
+  ikuzo_sylius_avis_verifies.listener.menu.admin:
+    class: Ikuzo\SyliusAvisVerifiesPlugin\Menu\AdminMenuBuilder
+    tags:
+      - { name: kernel.event_listener, event: sylius.menu.admin.main, method: addItems }

@@ -1,0 +1,3 @@
+ikuzo_avis_verifies_admin:
+    resource: routing/admin.yaml
+    prefix: /%sylius_admin.path_name%

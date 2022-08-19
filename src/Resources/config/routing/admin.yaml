@@ -1,0 +1,14 @@
+ikuzo_avis_verifies_admin_channel_review:
+  resource: |
+    section: admin
+    alias: ikuzo_avis_verifies.channel_review
+    templates: "@SyliusAdmin\\Crud"
+    permission: true
+    redirect: update
+    grid: ikuzo_avis_verifies_channel_review
+    vars:
+      all:
+        subheader: ikuzo_avis_verifies.grid.channel_review.subheader
+      index:
+        icon: newspaper
+  type: sylius.resource

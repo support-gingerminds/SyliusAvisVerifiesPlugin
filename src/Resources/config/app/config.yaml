@@ -22,12 +22,21 @@ sylius_ui:
           priority: 5
 
 sylius_grid:
-    grids:
-      sylius_admin_order:
-        filters:
-          avisVerifiesEmailsSent:
-            type: boolean
-            label: ikuzo_avis_verifies.grid.filters.email_sent
+  grids:
+    sylius_admin_order:
+      filters:
+        avisVerifiesEmailsSent:
+          type: boolean
+          label: ikuzo_avis_verifies.grid.filters.email_sent
+    ikuzo_avis_verifies_channel_review:
+      driver:
+        options:
+          class: "%ikuzo_avis_verifies.model.channel_review.class%"
+      sorting:
+        id: desc
+      fields:
+        id:
+          type: string
 
 winzou_state_machine:
   sylius_order:
