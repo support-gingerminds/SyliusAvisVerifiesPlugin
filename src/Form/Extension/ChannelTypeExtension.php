@@ -6,7 +6,6 @@ use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -20,7 +19,7 @@ final class ChannelTypeExtension extends AbstractTypeExtension
                 'required' => true,
                 'label' => 'ikuzo_avis_verifies.form.active',
             ])
-            ->add('avisVerifiesSecretKey', PasswordType::class, [
+            ->add('avisVerifiesSecretKey', TextType::class, [
                 'required' => false,
                 'label' => 'ikuzo_avis_verifies.form.secret_key',
             ])
