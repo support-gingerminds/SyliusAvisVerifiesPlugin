@@ -37,6 +37,43 @@ sylius_grid:
       fields:
         id:
           type: string
+        channel:
+          type: twig
+          label: sylius.ui.channel
+          sortable: channel.code
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
+          path: channel
+        number:
+          type: twig
+          label: sylius.ui.number
+          sortable: ~
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
+          path: order
+        rate:
+          type: string
+          label: ikuzo_avis_verifies.ui.rate
+        reviewedAt:
+          type: datetime
+          label: ikuzo_avis_verifies.ui.reviewed_at
+      filters:
+        channel:
+          type: entity
+          label: sylius.ui.channel
+          form_options:
+            class: "%sylius.model.channel.class%"
+        order_number:
+          type: string
+          label: sylius.ui.order
+          options:
+            fields: [order.number, order.customer.email, order.customer.firstName, order.customer.lastName]
+        reviewedAt:
+          type: date
+          label: sylius.ui.date
+          options:
+            field: reviewedAt
+            inclusive_to: true
 
 winzou_state_machine:
   sylius_order:

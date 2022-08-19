@@ -70,6 +70,13 @@ class Channel extends BaseChannel implements AvisVerifiesChannelInterface
 }
 ```
 
+Import routes
+```yaml
+# config/routes.yaml
+ikuzo_avis_verifies_plugin:
+ resource: "@IkuzoSyliusAvisVerifiesPlugin/Resources/config/routing.yaml"
+```
+
 Update your database
 
 ```

@@ -1,6 +1,8 @@
 ikuzo_avis_verifies:
   ui:
     channel_reviews: Avis canal
+    rate: Note
+    reviewed_at: Avis recolté le
   form:
     title: Avis Vérifiés - Configuration
     active: Actif
