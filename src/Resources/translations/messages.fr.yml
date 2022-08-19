@@ -3,6 +3,9 @@ ikuzo_avis_verifies:
     channel_reviews: Avis canal
     rate: Note
     reviewed_at: Avis recolté le
+    firstname: Firstname
+    lastname: Lastname
+    content: Content
   form:
     title: Avis Vérifiés - Configuration
     active: Actif

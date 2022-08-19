@@ -51,6 +51,15 @@ sylius_grid:
           options:
             template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
           path: order
+        firstname:
+          type: string
+          label: ikuzo_avis_verifies.ui.firstname
+        lastname:
+          type: string
+          label: ikuzo_avis_verifies.ui.lastname
+        content:
+          type: string
+          label: ikuzo_avis_verifies.ui.content
         rate:
           type: string
           label: ikuzo_avis_verifies.ui.rate
