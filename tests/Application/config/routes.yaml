@@ -1,0 +1,2 @@
+ikuzo_avis_verifies_plugin:
+ resource: "@IkuzoSyliusAvisVerifiesPlugin/Resources/config/routing.yaml"
