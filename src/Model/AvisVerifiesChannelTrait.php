@@ -65,6 +65,6 @@ trait AvisVerifiesChannelTrait {
 
     public function getAvisVerifiesDaysBeforeSent(): int
     {
-        return $this->avisVerifiesDaysBeforeSent;
+        return (int)$this->avisVerifiesDaysBeforeSent;
     }
 }

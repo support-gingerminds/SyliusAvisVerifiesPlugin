@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+    <mapped-superclass name="Ikuzo\SyliusAvisVerifiesPlugin\Entity\ChannelReview" table="ikuzo_channel_review">
+        <id name="id" type="integer">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <many-to-one field="order" target-entity="Sylius\Component\Order\Model\OrderInterface">
+            <join-column name="order_id" referenced-column-name="id" nullable="true" on-delete="CASCADE"/>
+        </many-to-one>
+
+        <many-to-one field="channel" target-entity="Sylius\Component\Core\Model\ChannelInterface">
+            <join-column name="channel_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
+        </many-to-one>
+
+        <field name="rate" type="integer"/>
+
+        <field name="publishedAt" column="published_at" type="datetime"/>
+
+        <field name="reviewedAt" column="reviewed_at" type="datetime"/>
+
+        <field name="reviewId" column="review_id" type="string"/>
+
+        <field name="content" column="content" type="text"/>
+
+        <field name="firstname" column="firstname" type="string"/>
+
+        <field name="lastname" column="lastname" type="string"/>
+
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update"/>
+        </field>
+    </mapped-superclass>
+</doctrine-mapping>
