@@ -18,6 +18,13 @@ services:
       - '@ikuzo_sylius_avis_verifies.processor.orders'
     tags: ['console.command']
 
+  ikuzo_sylius_avis_verifies.command.process_channel_reviews:
+    class: Ikuzo\SyliusAvisVerifiesPlugin\Command\AvisVerifiesProcessChannelReviewsCommand
+    arguments: 
+      - '@sylius.http_client'
+      - '@doctrine.orm.entity_manager'
+    tags: ['console.command']
+
   ikuzo_sylius_avis_verifies.form.extension.channel:
     class: Ikuzo\SyliusAvisVerifiesPlugin\Form\Extension\ChannelTypeExtension
     tags: ['form.type_extension']
