@@ -23,6 +23,22 @@ sylius_ui:
 
 sylius_grid:
   grids:
+    sylius_admin_product_review:
+      fields:
+        source:
+          type: twig
+          label: ikuzo_avis_verifies.grid.filters.source
+          options:
+            template: '@IkuzoSyliusAvisVerifiesPlugin/Grid/Column/_source.html.twig'
+      filters:
+        source:
+          type: select
+          label: ikuzo_avis_verifies.grid.filters.source
+          form_options:
+            choices: 
+              Sylius: null
+              Avis vérifiés: avisverifies
+
     sylius_admin_order:
       filters:
         avisVerifiesEmailsSent:
