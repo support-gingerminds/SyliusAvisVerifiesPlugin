@@ -70,6 +70,23 @@ class Channel extends BaseChannel implements AvisVerifiesChannelInterface
 }
 ```
 
+Extend your ProductReview entity
+```php
+// [...]
+use Sylius\Component\Core\Model\ProductReview as BaseProductReview;
+use Ikuzo\SyliusAvisVerifiesPlugin\Model\AvisVerifiesProductReviewTrait;
+use Ikuzo\SyliusAvisVerifiesPlugin\Model\AvisVerifiesProductReviewInterface;
+
+/**
+ * @ORM\Table(name="sylius_product_review")
+ * @ORM\Entity()
+ */
+class ProductReview extends BaseProductReview implements AvisVerifiesProductReviewInterface
+{
+  use AvisVerifiesProductReviewTrait;
+}
+```
+
 Import routes
 ```yaml
 # config/routes.yaml
@@ -83,7 +100,7 @@ Update your database
 $ bin/console doctrine:schema:update --force
 ```
 
-Then configure your new Coliship gateway 
+Then configure your credentials from channel form 
 
 <img src="doc/config.png" />
 

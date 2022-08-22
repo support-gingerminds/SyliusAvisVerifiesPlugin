@@ -25,6 +25,14 @@ services:
       - '@doctrine.orm.entity_manager'
     tags: ['console.command']
 
+  ikuzo_sylius_avis_verifies.command.process_product_reviews:
+    class: Ikuzo\SyliusAvisVerifiesPlugin\Command\AvisVerifiesProcessProductReviewsCommand
+    arguments: 
+      - '@sylius.http_client'
+      - '@doctrine.orm.entity_manager'
+      - '@messenger.default_bus'
+    tags: ['console.command']
+
   ikuzo_sylius_avis_verifies.form.extension.channel:
     class: Ikuzo\SyliusAvisVerifiesPlugin\Form\Extension\ChannelTypeExtension
     tags: ['form.type_extension']
@@ -50,6 +58,15 @@ services:
     class: Ikuzo\SyliusAvisVerifiesPlugin\MessageHandler\SendOrderToAvisVerifiesHandler
     arguments:
       - '@sylius.repository.order'
+      - '@ikuzo_sylius_avis_verifies.webservice.avis_verifies'
+      - '@doctrine.orm.entity_manager'
+    tags: ['messenger.message_handler']
+
+  ikuzo_sylius_avis_verifies.message_handler.fetch_product_avis_verifies_handler:
+    class: Ikuzo\SyliusAvisVerifiesPlugin\MessageHandler\FetchProductAvisVerifiesHandler
+    arguments:
+      - '@sylius.repository.product'
+      - '@sylius.repository.channel'
       - '@ikuzo_sylius_avis_verifies.webservice.avis_verifies'
       - '@doctrine.orm.entity_manager'
     tags: ['messenger.message_handler']

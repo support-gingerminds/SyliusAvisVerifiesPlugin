@@ -20,9 +20,39 @@ sylius_ui:
         avis_verifies:
           template: '@IkuzoSyliusAvisVerifiesPlugin/Channel/_form.html.twig'
           priority: 5
+    sylius.shop.product.show.tab_reviews:
+      blocks:
+        latest_reviews:
+          template: '@IkuzoSyliusAvisVerifiesPlugin/Product/Show/Tabs/Reviews/_latest.html.twig'
+          priority: 30
+    sylius.shop.product_review.index.list:
+      blocks:
+        list:
+          template: '@IkuzoSyliusAvisVerifiesPlugin/ProductReview/_list.html.twig'
+          priority: 20
+
 
 sylius_grid:
   grids:
+    sylius_admin_product_review:
+      fields:
+        source:
+          type: twig
+          label: ikuzo_avis_verifies.grid.filters.source
+          options:
+            template: '@IkuzoSyliusAvisVerifiesPlugin/Grid/Column/_source.html.twig'
+      filters:
+        author:
+          type: string
+          label: sylius.ui.customer
+        source:
+          type: select
+          label: ikuzo_avis_verifies.grid.filters.source
+          form_options:
+            choices: 
+              Sylius: null
+              Avis vérifiés: avisverifies
+
     sylius_admin_order:
       filters:
         avisVerifiesEmailsSent:
