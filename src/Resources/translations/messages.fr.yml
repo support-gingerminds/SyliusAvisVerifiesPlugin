@@ -34,6 +34,10 @@ ikuzo_avis_verifies:
       subheader: Gestion des avis de vos canaux de vente
     filters:
       email_sent: Envoyé à Avis Vérifiés
+      source: Source
+    options:
+      sylius: Sylius
+      avisverifies: Avis Vérifiés
   menu:
     channel_review: 
       label: Avis canal
