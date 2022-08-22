@@ -31,6 +31,9 @@ sylius_grid:
           options:
             template: '@IkuzoSyliusAvisVerifiesPlugin/Grid/Column/_source.html.twig'
       filters:
+        author:
+          type: string
+          label: sylius.ui.customer
         source:
           type: select
           label: ikuzo_avis_verifies.grid.filters.source

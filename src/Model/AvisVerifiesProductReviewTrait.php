@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Ikuzo\SyliusAvisVerifiesPlugin\Model;
 
+use Sylius\Component\Core\Model\Customer;
+use Sylius\Component\Review\Model\ReviewerInterface;
 trait AvisVerifiesProductReviewTrait
 {
     /**
@@ -24,7 +26,7 @@ trait AvisVerifiesProductReviewTrait
     public function getSource(): string
     {
         if ($this->source === null) {
-            return 'website';
+            return 'sylius';
         }
 
         return $this->source;

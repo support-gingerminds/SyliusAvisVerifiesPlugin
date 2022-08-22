@@ -9,20 +9,21 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Ikuzo\SyliusAvisVerifiesPlugin\Model\AvisVerifiesProductReviewInterface;
+use Sylius\Component\Core\Model\Order;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class FetchProductAvisVerifiesHandler implements MessageHandlerInterface
 {
-    private ProductRepositoryInterface $productRepository;
-    private ChannelRepositoryInterface $channelRepository;
-    private AvisVerifiesWebservice $webservice;
-    private EntityManagerInterface $em;
-
-    public function __construct(ProductRepositoryInterface $productRepository, ChannelRepositoryInterface $channelRepository,AvisVerifiesWebservice $webservice, EntityManagerInterface $em)
+    public function __construct(
+        private ProductRepositoryInterface $productRepository, 
+        private ChannelRepositoryInterface $channelRepository, 
+        private AvisVerifiesWebservice $webservice, 
+        private EntityManagerInterface $em,
+        private FactoryInterface $productReviewFactory
+        )
     {
-        $this->productRepository = $productRepository;
-        $this->channelRepository = $channelRepository;
-        $this->webservice = $webservice;
-        $this->em = $em;
     }
 
     public function __invoke(FetchProductAvisVerifies $message)
@@ -32,31 +33,42 @@ class FetchProductAvisVerifiesHandler implements MessageHandlerInterface
         ]);
         $channel = $this->channelRepository->find($message->getChannelId());
         
-        foreach ($res = $this->webservice->fetchProductReviews($product, $channel) as $arr) {
+        foreach ($this->webservice->fetchProductReviews($product, $channel) as $arr) {
             $review = $this->em->getRepository(AvisVerifiesProductReviewInterface::class)->findOneBy([
-                'idSource' => $arr['id_review']
+                'idSource' => $arr['id_review_product']
             ]);
 
             if ($review === null) {
-                $review = $this->container->get('sylius.factory.product_review')->createNew();
+                $review = $this->productReviewFactory->createNew();
+                
                 $product = $this->em->getRepository(ProductInterface::class)->findOneBy([
-                    'slug' => $arr['id_product'],
-                    'channel' => $channel
+                    'code' => $arr['id_product'],
                 ]);
-                $review->setSource('avisverifies');
-                $review->setIdSource($arr['id_review']);
-            }
-            $review->setContent($arr['review']);
-            $review->setRate((int)$arr['rate']);
-            $review->setLastname($arr['lastname']);
-            $review->setFirstname($arr['firstname']);
-            $review->setPublishedAt(new \DateTime($arr['publish_date']));
-            $review->setReviewedAt(new \DateTime($arr['review_date']));
-            $review->setRawSource($arr);
 
-            $this->em->persist($review);
+                $review->setReviewSubject($product);
+                $review->setSource('avisverifies');
+                $review->setIdSource($arr['id_review_product']);
+                $review->setCreatedAt(new \DateTime($arr['review_date']));
+            }
+
+            $review->setComment($arr['review']);
+            $review->setRating((int)$arr['rate']);
+            $review->setRawSource($arr);
+            $review->setStatus('accepted');
+
+            $order = $this->em->getRepository(Order::class)->findOneBy([
+                'number' => $arr['order_ref'],
+                'channel' => $channel
+            ]);
+
+            if ($order instanceof OrderInterface) {
+                $review->setAuthor($order->getCustomer());
+
+                $this->em->persist($review);
+                $this->em->flush();
+            }
+            
         }
 
-        $this->em->flush();
     }
 }
