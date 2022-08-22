@@ -87,3 +87,4 @@ Then configure your new Coliship gateway
 
 <img src="doc/config.png" />
 
+
