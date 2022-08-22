@@ -4,10 +4,13 @@ namespace Ikuzo\SyliusAvisVerifiesPlugin\Webservice;
 
 use Sylius\Component\Order\Model\OrderInterface;
 use GuzzleHttp\ClientInterface;
+use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 
 class AvisVerifiesWebservice
 {
     const API_URL = 'https://www.avis-verifies.com/index.php';
+    const REVIEWS_API_URL = 'https://cl.avis-verifies.com/fr/cache/';
     
     private ClientInterface $client;
 
@@ -68,6 +71,23 @@ class AvisVerifiesWebservice
         }
 
         return false;
+    }
+
+    public function fetchProductReviews(ProductInterface $product, ChannelInterface $channel): array
+    {
+        $path = '';
+        $key = $channel->getAvisVerifiesWebsiteId();
+
+        for ($i = 0; $i < 3; $i ++) {
+            $path .= substr($key, $i, 1) . '/';
+        }
+        $path .= $key . '/AWS/PRODUCT_API/REVIEWS/' . $product->getCode() . '.json';
+
+        $arrReviews = [];
+        $response = $this->client->request('GET', self::REVIEWS_API_URL . $path);
+        $arrReviews = json_decode($response->getBody()->getContents(), true);
+
+        return $arrReviews;
     }
 
 }
