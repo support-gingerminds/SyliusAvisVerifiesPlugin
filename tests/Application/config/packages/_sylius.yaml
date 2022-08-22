@@ -24,3 +24,10 @@ sylius_order:
         order:
             classes:
                 model: Tests\Ikuzo\SyliusAvisVerifiesPlugin\Application\Entity\Order
+
+sylius_review:
+    resources:
+        product:
+            review:
+                classes:
+                    model: Tests\Ikuzo\SyliusAvisVerifiesPlugin\Application\Entity\ProductReview
