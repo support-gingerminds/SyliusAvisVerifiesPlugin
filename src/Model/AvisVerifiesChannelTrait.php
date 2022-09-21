@@ -14,17 +14,17 @@ trait AvisVerifiesChannelTrait {
     protected $isAvisVerifiesActive = false;
 
     /**
-     * @ORM\Column(name="avis_verifies_key_secret", type="string", length=255, nullable="true")
+     * @ORM\Column(name="avis_verifies_key_secret", type="string", length=255, nullable=true)
      **/
     protected $avisVerifiesSecretKey = null;
 
     /**
-     * @ORM\Column(name="avis_verifies_website_id", type="string", length=255, nullable="true")
+     * @ORM\Column(name="avis_verifies_website_id", type="string", length=255, nullable=true)
      **/
     protected $avisVerifiesWebsiteId = null;
     
     /**
-     * @ORM\Column(name="avis_verifies_days_before_sent", type="integer", nullable="false")
+     * @ORM\Column(name="avis_verifies_days_before_sent", type="integer", nullable=false)
      **/
     protected $avisVerifiesDaysBeforeSent = 0;
 
