@@ -3,7 +3,7 @@
 namespace Ikuzo\SyliusAvisVerifiesPlugin\Webservice;
 
 use Sylius\Component\Order\Model\OrderInterface;
-use GuzzleHttp\ClientInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 
@@ -12,9 +12,9 @@ class AvisVerifiesWebservice
     const API_URL = 'https://www.avis-verifies.com/index.php';
     const REVIEWS_API_URL = 'https://cl.avis-verifies.com/fr/cache/';
     
-    private ClientInterface $client;
+    private HttpClientInterface $client;
 
-    public function __construct(ClientInterface $client)
+    public function __construct(HttpClientInterface $client)
     {
         $this->client = $client;
     }
