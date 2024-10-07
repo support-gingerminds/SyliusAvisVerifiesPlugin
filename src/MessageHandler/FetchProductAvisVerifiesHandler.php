@@ -57,6 +57,8 @@ class FetchProductAvisVerifiesHandler implements MessageHandlerInterface
                 $review->setRawSource($arr);
                 $review->setStatus('accepted');
 
+                dd($review);
+
                 $order = $this->em->getRepository(Order::class)->findOneBy([
                     'number' => $arr['order_ref'],
                     'channel' => $channel
