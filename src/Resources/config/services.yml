@@ -21,14 +21,14 @@ services:
   ikuzo_sylius_avis_verifies.command.process_channel_reviews:
     class: Ikuzo\SyliusAvisVerifiesPlugin\Command\AvisVerifiesProcessChannelReviewsCommand
     arguments: 
-      - '@sylius.http_client'
+      - '@http_client'
       - '@doctrine.orm.entity_manager'
     tags: ['console.command']
 
   ikuzo_sylius_avis_verifies.command.process_product_reviews:
     class: Ikuzo\SyliusAvisVerifiesPlugin\Command\AvisVerifiesProcessProductReviewsCommand
     arguments: 
-      - '@sylius.http_client'
+      - '@http_client'
       - '@doctrine.orm.entity_manager'
       - '@messenger.default_bus'
     tags: ['console.command']
@@ -74,7 +74,7 @@ services:
   ikuzo_sylius_avis_verifies.webservice.avis_verifies:
     class: Ikuzo\SyliusAvisVerifiesPlugin\Webservice\AvisVerifiesWebservice
     arguments:
-      - '@sylius.http_client'
+      - '@http_client'
 
   ikuzo_sylius_avis_verifies.event_listener.on_order_fulfilled:
     class: Ikuzo\SyliusAvisVerifiesPlugin\EventListener\OnOrderFulfilledEvent
