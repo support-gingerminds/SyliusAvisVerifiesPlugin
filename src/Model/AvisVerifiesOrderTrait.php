@@ -9,12 +9,14 @@ trait AvisVerifiesOrderTrait
     /**
      * @ORM\Column(name="avis_verifies_emails_sent", type="boolean")
      */
-    protected $avisVerifiesEmailsSent = false;
+    #[ORM\Column(name: 'avis_verifies_emails_sent')]
+    protected bool $avisVerifiesEmailsSent = false;
 
     /**
      * @ORM\Column(name="avis_verifies_emails_sent_at", type="datetime", nullable=true)
      */
-    protected $avisVerifiesEmailsSentAt = null;
+    #[ORM\Column(name: 'avis_verifies_emails_sent_at', nullable: true)]
+    protected ?\DateTime $avisVerifiesEmailsSentAt = null;
 
     public function getAvisVerifiesEmailsSent(): bool
     {

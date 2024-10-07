@@ -6,22 +6,26 @@ namespace Ikuzo\SyliusAvisVerifiesPlugin\Model;
 
 use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Review\Model\ReviewerInterface;
+use Doctrine\DBAL\Types\Types;
 trait AvisVerifiesProductReviewTrait
 {
     /**
      * @ORM\Column(name="source", type="string", nullable=true)
      */
-    protected $source;
+    #[ORM\Column(name: 'source', nullable: true)]
+    protected ?string $source;
 
     /**
      * @ORM\Column(name="source_id", type="string", nullable=true)
      */
-    protected $idSource;
+    #[ORM\Column(name: 'source_id', nullable: true)]
+    protected ?string $idSource;
 
     /**
      * @ORM\Column(name="source_raw", type="array", nullable=true)
      */
-    protected $rawSource;
+    #[ORM\Column(name: 'source_raw', type: Types::SIMPLE_ARRAY, nullable: true)]
+    protected ?array $rawSource;
 
     public function getSource(): string
     {

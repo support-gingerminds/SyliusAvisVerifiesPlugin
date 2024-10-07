@@ -11,22 +11,26 @@ trait AvisVerifiesChannelTrait {
     /**
      * @ORM\Column(name="avis_verifies_active", type="boolean")
      **/
-    protected $isAvisVerifiesActive = false;
+    #[ORM\Column(name: 'avis_verifies_active')]
+    protected bool $isAvisVerifiesActive = false;
 
     /**
      * @ORM\Column(name="avis_verifies_key_secret", type="string", length=255, nullable=true)
      **/
-    protected $avisVerifiesSecretKey = null;
+    #[ORM\Column(name: 'avis_verifies_key_secret', length: 255, nullable: true)]
+    protected ?string $avisVerifiesSecretKey = null;
 
     /**
      * @ORM\Column(name="avis_verifies_website_id", type="string", length=255, nullable=true)
      **/
-    protected $avisVerifiesWebsiteId = null;
+    #[ORM\Column(name: 'avis_verifies_website_id', length: 255, nullable: true)]
+    protected ?string $avisVerifiesWebsiteId = null;
     
     /**
      * @ORM\Column(name="avis_verifies_days_before_sent", type="integer", nullable=false)
      **/
-    protected $avisVerifiesDaysBeforeSent = 0;
+    #[ORM\Column(name: 'avis_verifies_days_before_sent')]
+    protected ?int $avisVerifiesDaysBeforeSent = 0;
 
     public function getIsAvisVerifiesActive(): bool
     {
