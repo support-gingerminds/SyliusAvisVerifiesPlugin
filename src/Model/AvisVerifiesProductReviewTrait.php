@@ -7,6 +7,8 @@ namespace Ikuzo\SyliusAvisVerifiesPlugin\Model;
 use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+
 trait AvisVerifiesProductReviewTrait
 {
     /**

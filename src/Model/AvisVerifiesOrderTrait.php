@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Ikuzo\SyliusAvisVerifiesPlugin\Model;
 
+use Doctrine\ORM\Mapping as ORM;
+
 trait AvisVerifiesOrderTrait
 {
     /**
