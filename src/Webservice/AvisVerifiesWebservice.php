@@ -62,7 +62,7 @@ class AvisVerifiesWebservice
             ]);
 
             dd($res);
-            $response = json_decode((string) $res->getBody());
+            $response = json_decode((string) $res->getContent());
     
             if ($res->getStatusCode() === 200 && $response->return === 1) {
                 return true;
@@ -87,7 +87,7 @@ class AvisVerifiesWebservice
         $arrReviews = [];
         $response = $this->client->request('GET', self::REVIEWS_API_URL . $path);
         dd($response);
-        $arrReviews = json_decode($response->getBody()->getContents(), true);
+        $arrReviews = json_decode($response->getContent(), true);
 
         return $arrReviews;
     }
