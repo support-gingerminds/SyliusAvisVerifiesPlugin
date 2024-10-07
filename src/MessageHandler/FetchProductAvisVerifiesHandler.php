@@ -43,7 +43,7 @@ class FetchProductAvisVerifiesHandler implements MessageHandlerInterface
                     $review = $this->productReviewFactory->createNew();
 
                     $product = $this->em->getRepository(ProductInterface::class)->findOneBy([
-                        'code' => $arr['id_product'],
+                        'originCode' => $arr['id_product'],
                     ]);
 
                     $review->setReviewSubject($product);

@@ -68,6 +68,7 @@ class AvisVerifiesProcessChannelReviewsCommand extends Command
         $res = [];
 
         $response = $this->client->request('GET', self::API_URL . $path);
+        dd($res);
         $res = json_decode($response->getBody()->getContents(), true);
         return $res ?? [];
     }
