@@ -28,7 +28,6 @@ class FetchProductAvisVerifiesHandler implements MessageHandlerInterface
 
     public function __invoke(FetchProductAvisVerifies $message)
     {
-        dump($message);
         $product = $this->productRepository->findOneBy([
             'originCode' => $message->getProductSlug()
         ]);
@@ -58,7 +57,6 @@ class FetchProductAvisVerifiesHandler implements MessageHandlerInterface
                 $review->setRawSource($arr);
                 $review->setStatus('accepted');
 
-                dd($arr);
                 $order = $this->em->getRepository(Order::class)->findOneBy([
                     'originNumber' => $arr['order_ref'],
                     'channel' => $channel
