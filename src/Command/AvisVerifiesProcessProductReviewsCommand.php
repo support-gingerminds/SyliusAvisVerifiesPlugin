@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use GuzzleHttp\ClientInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Ikuzo\SyliusAvisVerifiesPlugin\Message\FetchProductAvisVerifies;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -20,7 +20,7 @@ class AvisVerifiesProcessProductReviewsCommand extends Command
 
     // /AWS/PRODUCT_API/REVIEWS/files_list.txt
 
-    public function __construct(private ClientInterface $client, private EntityManagerInterface $em, private MessageBusInterface $bus) {
+    public function __construct(private HttpClientInterface $client, private EntityManagerInterface $em, private MessageBusInterface $bus) {
         parent::__construct(null);
     }
 

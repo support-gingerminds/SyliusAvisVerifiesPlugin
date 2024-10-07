@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use GuzzleHttp\ClientInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Ikuzo\SyliusAvisVerifiesPlugin\Entity\ChannelReview;
 use Ikuzo\SyliusAvisVerifiesPlugin\Entity\ChannelReviewInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
@@ -19,7 +19,7 @@ class AvisVerifiesProcessChannelReviewsCommand extends Command
     const API_URL = 'https://cl.avis-verifies.com/fr/cache/';
     protected static $defaultName = 'ikuzo:avisverifies:process-channel-reviews';
 
-    public function __construct(private ClientInterface $client, private EntityManagerInterface $em) {
+    public function __construct(private HttpClientInterface $client, private EntityManagerInterface $em) {
         parent::__construct(null);
     }
 
