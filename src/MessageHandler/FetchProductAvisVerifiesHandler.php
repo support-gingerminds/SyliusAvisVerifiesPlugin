@@ -29,7 +29,7 @@ class FetchProductAvisVerifiesHandler implements MessageHandlerInterface
     public function __invoke(FetchProductAvisVerifies $message)
     {
         $product = $this->productRepository->findOneBy([
-            'code' => $message->getProductSlug()
+            'originCode' => $message->getProductSlug()
         ]);
         $channel = $this->channelRepository->find($message->getChannelId());
         
