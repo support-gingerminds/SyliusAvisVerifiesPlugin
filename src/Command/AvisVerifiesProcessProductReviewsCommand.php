@@ -67,6 +67,7 @@ class AvisVerifiesProcessProductReviewsCommand extends Command
     protected function fetchProducts(string $path): array
     {
         $csv = file_get_contents(self::API_URL . $path);
+        dd($csv);
         $lines = explode(PHP_EOL, $csv);
         $data = [];
         foreach ($lines as $line) {
